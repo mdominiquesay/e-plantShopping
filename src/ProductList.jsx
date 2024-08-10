@@ -244,11 +244,20 @@ function ProductList() {
         e.preventDefault();
         setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
         setShowCart(false); // Hide the cart when navigating to About Us
+
+        setAddedToCart({});
+        cartItens.items.forEach((item) => {
+            setAddedToCart((prevState) => ({
+                ...prevState,
+                [item.name]: true, // Set the product name as key and value as true to indicate it's added to cart
+            }));
+        });
     };
 
     const handleContinueShopping = (e) => {
-        e.preventDefault();
-        setShowCart(false);
+        handlePlantsClick(e);
+        
+        
     };
 
     const handleAddToCart = (product) => {
