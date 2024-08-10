@@ -7,7 +7,6 @@ import './CartItem.css';
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
-  const [addedToCart, setAddedToCart] = useState({});
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
     var iTotal=0;
@@ -16,9 +15,12 @@ const CartItem = ({ onContinueShopping }) => {
     });
     return iTotal;
   };
+  const calculateTotalItems = () => {
+    return count(item);
+  };
 
-  const handleCheckoutShopping = (e) => {
-    alert('Functionality to be added for future reference');
+  const handleContinueShopping = (e) => {
+    onContinueShopping(e);
   };
 
 
@@ -57,7 +59,7 @@ const CartItem = ({ onContinueShopping }) => {
             <img className="cart-item-image" src={item.image} alt={item.name} />
             <div className="cart-item-details">
               <div className="cart-item-name">{item.name}</div>
-              <div className="cart-item-cost">{item.cost}</div>
+              <div className="cart-item-cost">${item.cost}</div>
               <div className="cart-item-quantity">
                 <button className="cart-item-button cart-item-button-dec" onClick={() => handleDecrement(item)}>-</button>
                 <span className="cart-item-quantity-value">{item.quantity}</span>
